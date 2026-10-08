@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Financeiro | Obsidian Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="crown" class="logo-icone"></i>
+                <span>Obsidian <strong>Finance</strong></span>
+            </a>
+
+            <nav aria-label="Navegacao Principal">
+                <ul class="menu">
+                    <li><a href="financeiro.html" class="active">Painel</a></li>
+
+                    <li class="menu-item dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown(event, 'submenuSobre')">
+                            Sobre <i data-lucide="chevron-down" class="seta-icone"></i>
+                        </button>
+                        <ul id="submenuSobre" class="submenu">
+                            <li><a href="#" onclick="mostrarEmpresa()">Empresa</a></li>
+                            <li><a href="#" onclick="mostrarClientes()">Clientes</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#" onclick="sair()" class="btn-link"><i data-lucide="log-out"></i> Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container dashboard">
+        <div class="header-dashboard">
+            <span class="tag">PAINEL DE CONTROLE</span>
+            <h1>Meu controle financeiro</h1>
+            <p>Registe e acompanhe os seus ganhos e despesas em tempo real.</p>
+        </div>
+
+        <section class="resumo">
+            <div class="card saldo">
+                <div class="card-topo">
+                    <span>Saldo Total</span>
+                    <i data-lucide="wallet" class="icone-card"></i>
+                </div>
+                <h2 id="saldo">R$ 0,00</h2>
+            </div>
+
+            <div class="card ganho">
+                <div class="card-topo">
+                    <span>Ganhos</span>
+                    <i data-lucide="arrow-up-circle" class="icone-card verde"></i>
+                </div>
+                <h2 id="ganhos">R$ 0,00</h2>
+            </div>
+
+            <div class="card despesa">
+                <div class="card-topo">
+                    <span>Despesas</span>
+                    <i data-lucide="arrow-down-circle" class="icone-card vermelho"></i>
+                </div>
+                <h2 id="despesas">R$ 0,00</h2>
+            </div>
+        </section>
+
+        <section class="financeiro-conteudo">
+            <div class="form-financeiro">
+                <h2>Nova movimentacao</h2>
+                <form onsubmit="adicionarMovimentacao(event)">
+                    <div class="grupo-input">
+                        <label for="descricao">Descricao</label>
+                        <input type="text" id="descricao" placeholder="Ex: Salario, Alimentacao..." required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="valor">Valor (R$)</label>
+                        <input type="number" id="valor" step="0.01" min="0.01" placeholder="0,00" required>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" required>
+                            <option value="ganho">Ganho (+)</option>
+                            <option value="despesa">Despesa (-)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="botao">
+                        <i data-lucide="plus"></i>
+                        <span>Adicionar movimentacao</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="lista-financeira">
+                <h2>Historico de Movimentacies</h2>
+                <div id="listaMovimentacoes">
+                    <p class="sem-movimentacoes">Nenhuma movimentacao cadastrada.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+            <div>
+                <p>&copy; 2026 Obsidian Finance. Todos os direitos reservados.</p>
+                <p class="info-contato-rodape">
+                    <i data-lucide="phone"></i> (11) 97000-8080 | 
+                    <i data-lucide="mail"></i> contato@obsidianfinance.com.br
+                </p>
+            </div>
+            <p class="data-footer">Acesso em: <span id="dataAtual"></span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

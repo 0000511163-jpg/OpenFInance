@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acesse sua area financeira na Obsidian Finance.">
+    <title>Login | Obsidian Finance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="crown" class="logo-icone"></i>
+                <span>Obsidian <strong>Finance</strong></span>
+            </a>
+
+            <nav aria-label="Navegacao Principal">
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+
+                    <li class="menu-item dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown(event, 'submenuSobre')">
+                            Sobre <i data-lucide="chevron-down" class="seta-icone"></i>
+                        </button>
+                        <ul id="submenuSobre" class="submenu">
+                            <li><a href="#" onclick="mostrarEmpresa()">Empresa</a></li>
+                            <li><a href="#" onclick="mostrarClientes()">Clientes</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown(event, 'submenuContato')">
+                            Contato <i data-lucide="chevron-down" class="seta-icone"></i>
+                        </button>
+                        <ul id="submenuContato" class="submenu">
+                            <li><a href="tel:+5511970008080"><i data-lucide="phone"></i> (11) 97000-8080</a></li>
+                            <li><a href="mailto:contato@obsidianfinance.com.br"><i data-lucide="mail"></i> contato@obsidianfinance.com.br</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="login.html" class="btn-link active">Entrar</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="area-login">
+        <div class="caixa-formulario">
+            <div class="header-card">
+                <div class="icone-login">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h1>Acesse sua conta</h1>
+                <p>Gerencie seu patrimonio com a Obsidian Finance.</p>
+            </div>
+
+            <form id="formLogin" onsubmit="login(event)">
+                <div class="grupo-input">
+                    <label for="email">E-mail</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="mail"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            placeholder="seuemail@exemplo.com" 
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <div class="label-linha">
+                        <label for="senha">Senha</label>
+                        <a href="#" class="link-esqueceu">Esqueceu a senha?</a>
+                    </div>
+                    <div class="input-com-icone">
+                        <i data-lucide="lock"></i>
+                        <input 
+                            type="password" 
+                            id="senha" 
+                            name="senha"
+                            placeholder="••••••••" 
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" class="btn-toggle-senha" onclick="toggleSenha()" aria-label="Mostrar senha">
+                            <i data-lucide="eye" id="iconeOlho"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="botao">
+                    <span>Entrar na conta</span>
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+
+            <p class="link-formulario">
+                Ainda nao tem conta?
+                <a href="cadastro.html">Criar conta gratuita</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+            <div>
+                <p>&copy; 2026 Obsidian Finance. Todos os direitos reservados.</p>
+                <p class="info-contato-rodape">
+                    <i data-lucide="phone"></i> (11) 97000-8080 | 
+                    <i data-lucide="mail"></i> contato@obsidianfinance.com.br
+                </p>
+            </div>
+            <p class="data-footer">Acesso em: <span id="dataAtual"></span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function toggleSenha() {
+            const campoSenha = document.getElementById('senha');
+            const iconeOlho = document.getElementById('iconeOlho');
+            
+            if (campoSenha.type === 'password') {
+                campoSenha.type = 'text';
+                iconeOlho.setAttribute('data-lucide', 'eye-off');
+            } else {
+                campoSenha.type = 'password';
+                iconeOlho.setAttribute('data-lucide', 'eye');
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>

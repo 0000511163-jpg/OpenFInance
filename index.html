@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Obsidian Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <button id="loginbt"><a id="login-link" href="login.html"><img id="loginicon" src="icon.png" alt="Login"></a></button>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="crown" class="logo-icone"></i>
+                <span>Obsidian <strong>Finance</strong></span>
+            </a>
+
+            <nav aria-label="Navegacao Principal">
+                <ul class="menu">
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    
+
+                    <li class="menu-item dropdown">
+
+    <button class="dropdown-btn">
+        Sobre
+        <i data-lucide="chevron-down" class="seta-icone"></i>
+    </button>
+
+    <ul id="submenuSobre" class="submenu">
+
+        <li>
+            <a href="#" class="info-link">
+                Empresa
+            </a>
+
+            <div class="info-box">
+                <h3>Obsidian Finance</h3>
+                <p>
+                    A Obsidian Finance e uma plataforma criada
+                    para ajudar voce a organizar suas financas
+                    de forma simples, segura e inteligente.
+                </p>
+            </div>
+        </li>
+
+        <li>
+            <a href="#" class="info-link">
+                Clientes
+            </a>
+
+            <div class="info-box">
+                <h3>Nossos Clientes</h3>
+                <p>
+                    Oferecemos ferramentas para pessoas que
+                    desejam controlar seus gastos, organizar
+                    seus ganhos e planejar seu futuro financeiro.
+                </p>
+            </div>
+        </li>
+
+    </ul>
+
+</li>
+
+                    <li class="menu-item dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown(event, 'submenuContato')">
+                            Contato <i data-lucide="chevron-down" class="seta-icone"></i>
+                        </button>
+                        <ul id="submenuContato" class="submenu">
+                            <li><a href="tel:+5511970008080"><i data-lucide="phone"></i> Tel: (11) 97000-8080</a></li>
+                            <li><a href="mailto:contato@obsidianfinance.com.br"><i data-lucide="mail"></i> contato@obsidianfinance.com.br</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero-secao">
+            <div class="hero-texto">
+                <span class="tag">CONTROLE FINANCEIRO INTELIGENTE</span>
+                <h1>Domine o seu dinheiro com simplicidade</h1>
+                <p>
+                    Acompanhe os seus ganhos, organize as suas despesas diarias e visualize o seu patrimonio num painel intuitivo e moderno.
+                </p>
+                <div class="botoes">
+                    <a href="cadastro.html" class="botao">Criar conta gratuita</a>
+                    <a href="login.html" class="botao botao-secundario">Aceder a conta</a>
+                </div>
+            </div>
+            
+        </section>
+
+        
+
+        <section class="beneficios">
+            <h2>Porque escolher a Obsidian Finance?</h2>
+            <p class="subtitulo">Ferramentas completas desenhadas para facilitar o seu dia a dia.</p>
+
+            <div class="cards-beneficios">
+                <div class="card beneficio">
+                    <div class="icone-box"><i data-lucide="trending-up"></i></div>
+                    <h3>Gestao de Ganhos</h3>
+                    <p>Registe salarios, rendimentos adicionais e investimentos num so lugar.</p>
+                </div>
+
+                <div class="card beneficio">
+                    <div class="icone-box"><i data-lucide="trending-down"></i></div>
+                    <h3>Controlo de Gastos</h3>
+                    <p>Mantenha as suas contas sob controlo e saiba exatamente para onde vai cada centimo.</p>
+                </div>
+
+                <div class="card beneficio">
+                    <div class="icone-box"><i data-lucide="pie-chart"></i></div>
+                    <h3>Saldo em Tempo Real</h3>
+                    <p>Calculo automatico e imediato do seu saldo liquido acumulado.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+            <div>
+                <p>&copy; 2026 Obsidian Finance. Todos os direitos reservados.</p>
+                <p class="info-contato-rodape">
+                    <i data-lucide="phone"></i> (11) 97000-8080 | 
+                    <i data-lucide="mail"></i> contato@obsidianfinance.com.br
+                </p>
+            </div>
+            <p class="data-footer">Acesso em: <span id="dataAtual"></span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

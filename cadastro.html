@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Obsidian Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="crown" class="logo-icone"></i>
+                <span>Obsidian <strong>Finance</strong></span>
+            </a>
+
+            <nav aria-label="Navegacao Principal">
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="login.html">Login</a></li>
+
+                    <li class="menu-item dropdown">
+                        <button class="dropdown-btn" onclick="toggleDropdown(event, 'submenuContato')">
+                            Contato <i data-lucide="chevron-down" class="seta-icone"></i>
+                        </button>
+                        <ul id="submenuContato" class="submenu">
+                            <li><a href="tel:+5511970008080"><i data-lucide="phone"></i> (11) 97000-8080</a></li>
+                            <li><a href="mailto:contato@obsidianfinance.com.br"><i data-lucide="mail"></i> contato@obsidianfinance.com.br</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="area-login">
+        <div class="caixa-formulario">
+            <div class="header-card">
+                <div class="icone-login">
+                    <i data-lucide="user-plus"></i>
+                </div>
+                <h1>Criar conta</h1>
+                <p>Preencha os seus dados para se registar gratuitamente.</p>
+            </div>
+
+            <form id="formCadastro" onsubmit="cadastrar(event)">
+                <div class="grupo-input">
+                    <label for="nome">Nome completo</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="user"></i>
+                        <input type="text" id="nome" placeholder="Seu nome completo" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="cadastroEmail">E-mail</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="mail"></i>
+                        <input type="email" id="cadastroEmail" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="telefone">Telefone</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="phone"></i>
+                        <input type="text" id="telefone" placeholder="(11) 97000-8080" maxlength="15" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="cpf">CPF</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="id-card"></i>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                    </div>
+                </div>
+
+
+                <div class="grupo-input">
+                    <label for="cadastroSenha">Senha</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="lock"></i>
+                        <input type="password" id="cadastroSenha" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="confirmarSenha">Confirmar senha</label>
+                    <div class="input-com-icone">
+                        <i data-lucide="shield-check"></i>
+                        <input type="password" id="confirmarSenha" placeholder="Repita a senha" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="botao">
+                    <span>Criar conta</span>
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+
+            <p class="link-formulario">
+                Já possui conta? <a href="login.html">Entrar</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+            <div>
+                <p>&copy; 2026 Obsidian Finance. Todos os direitos reservados.</p>
+                <p class="info-contato-rodape">
+                    <i data-lucide="phone"></i> (11) 97000-8080 | 
+                    <i data-lucide="mail"></i> contato@obsidianfinance.com.br
+                </p>
+            </div>
+            <p class="data-footer">Acesso em: <span id="dataAtual"></span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
