@@ -196,7 +196,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 16px;
+    padding: 32px 16px;
 }
 
 .caixa-formulario {
@@ -226,7 +226,7 @@ body {
 .header-card p { color: var(--texto-mutado); font-size: 13px; margin-top: 4px; }
 
 .grupo-input { margin-bottom: 14px; }
-.grupo-input label { display: block; font-size: 12.5px; font-weight: 500; margin-bottom: 6px; }
+.grupo-input label { display: block; font-size: 12.5px; font-weight: 500; margin-bottom: 6px;  }
 
 .input-com-icone { position: relative; display: flex; align-items: center; }
 .input-com-icone input, .grupo-input input, .grupo-input select {
@@ -234,7 +234,7 @@ body {
     padding: 8px 12px;
     background: var(--bg-input);
     border: 1px solid var(--borda);
-    border-radius: 6px;
+    border-radius: 32px;
     color: var(--texto-claro);
     font-size: 13.5px;
     outline: none;
@@ -306,7 +306,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 30px 16px;
+    padding: 32px 16px;
 }
 
 .header-dashboard { margin-bottom: 24px; }
@@ -411,7 +411,7 @@ body {
 .submenu {
     display: none;
     position: absolute;
-    top: 35px;
+    top: 32px;
     left: 0;
     width: 320px;
     padding: 10px;
@@ -459,7 +459,7 @@ body {
     border: 1px solid #6f35d9;
     border-radius: 12px;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
 
     z-index: 2000;
 }
@@ -555,12 +555,11 @@ body {
     /* Posicionamento horizontal e vertical */
     margin-left: 93%; /* Ajuste este % conforme necessário para mover para a direita/esquerda */
     position: relative;
-    transform: translateY(31px);
-    
+    transform: translateY(40px);
+    background-color: transparent;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    background: rgba(156, 115, 250, 0.15);
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -581,12 +580,12 @@ body {
 #loginicon,
 #loginicon img,
 #loginicon svg {
-    width: 25px !important;
-    height: 25px !important;
-    max-width: 25px !important;
-    max-height: 25px !important;
-    min-width: 25px !important;
-    min-height: 25px !important;
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
     object-fit: contain !important;
     display: block !important;
 }
