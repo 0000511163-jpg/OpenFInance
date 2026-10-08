@@ -33,44 +33,38 @@ document.addEventListener("click", function(event) {
 
 /* ================= MÁSCARAS E VALIDAÇÕES ================= */
 function validarEmail(email) {
-    return email.includes("@") && email.toLowerCase().endsWith(".com");
+    // Aceita qualquer e-mail no formato usuario@dominio.extensao
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function aplicarMascaraTelefone(input) {
     input.addEventListener("input", function(e) {
         let valor = e.target.value.replace(/\D/g, "");
-        
+        if (valor.length > 11) valor = valor.slice(0, 11);
+
         if (valor.length > 10) {
             valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
         } else if (valor.length > 6) {
             valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
         } else if (valor.length > 2) {
             valor = valor.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-        } else {
-            valor = valor.replace(/^(\d*)/, "($1");
+        } else if (valor.length > 0) {
+            valor = valor.replace(/^(\d{1,2})/, "($1");
         }
         e.target.value = valor;
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const inputCpf = document.getElementById('cpf');
+function aplicarMascaraCPF(inputCpf) {
+    inputCpf.addEventListener('input', (e) => {
+        let valor = e.target.value.replace(/\D/g, '').substring(0, 11);
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = valor;
+    });
+}
 
-  inputCpf.addEventListener('input', (e) => {
-    // Remove tudo o que não for dígito
-    let valor = e.target.value.replace(/\D/g, '');
-
-    // Limita a 11 dígitos numéricos
-    valor = valor.substring(0, 11);
-
-    // Aplica a formatação 000.000.000-00
-    valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
-    valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
-    valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-
-    e.target.value = valor;
-  });
-});
 /* ================= CADASTRO ================= */
 function cadastrar(event) {
     event.preventDefault();
@@ -78,13 +72,12 @@ function cadastrar(event) {
     const nome = document.getElementById("nome")?.value.trim();
     const email = document.getElementById("cadastroEmail")?.value.trim();
     const telefone = document.getElementById("telefone")?.value.replace(/\D/g, "");
-    const cpf = document.getElementById("cpf")?.value.trim();
+    const cpf = document.getElementById("cpf")?.value.replace(/\D/g, "");
     const senha = document.getElementById("cadastroSenha")?.value;
     const confirmar = document.getElementById("confirmarSenha")?.value;
-    
 
     if (!validarEmail(email)) {
-        alert("E-mail inválido! O endereço deve conter '@' e terminar com '.com'.");
+        alert("E-mail inválido! Por favor insira um endereço válido.");
         return;
     }
 
@@ -92,12 +85,13 @@ function cadastrar(event) {
         alert("Por favor, digite um telefone válido contendo DDD.");
         return;
     }
+
     if (cpf && cpf.length < 11) {
-        alert("Por favor,informe um cpf válido.");
+        alert("Por favor, informe um CPF válido com 11 dígitos.");
         return;
     }
 
-    if (senha.length < 6) {
+    if (!senha || senha.length < 6) {
         alert("A senha precisa ter pelo menos 6 caracteres.");
         return;
     }
@@ -107,30 +101,31 @@ function cadastrar(event) {
         return;
     }
 
-    const usuario = { nome, email, telefone, senha };
+    // CPF incluído no salvamento
+    const usuario = { nome, email, telefone, cpf, senha };
     localStorage.setItem("usuario", JSON.stringify(usuario));
-    localStorage.removeItem("tentativasLogin"); // Reseta o contador ao criar uma nova conta
+    localStorage.removeItem("tentativasLogin");
 
     alert("Cadastro realizado com sucesso!");
     window.location.href = "login.html";
 }
 
-/* ================= LOGIN COM LIMITE DE 2 ERROS ================= */
+/* ================= LOGIN ================= */
 function login(event) {
     event.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
-    const senha = document.getElementById("senha").value;
+    const email = document.getElementById("email")?.value.trim();
+    const senha = document.getElementById("senha")?.value;
 
     if (!validarEmail(email)) {
-        alert("Formato de e-mail inválido! Deve conter '@' e terminar em '.com'.");
+        alert("Formato de e-mail inválido!");
         return;
     }
 
     const usuarioSalvo = localStorage.getItem("usuario");
 
     if (!usuarioSalvo) {
-        alert("Nenhuma conta cadastrada. Redirecionando para o formulário de cadastro...");
+        alert("Nenhuma conta cadastrada. Redirecionando para o cadastro...");
         window.location.href = "cadastro.html";
         return;
     }
@@ -140,7 +135,7 @@ function login(event) {
 
     if (email === usuario.email && senha === usuario.senha) {
         localStorage.setItem("logado", "true");
-        localStorage.setItem("tentativasLogin", "0"); // Reseta contador após login bem-sucedido
+        localStorage.setItem("tentativasLogin", "0");
         alert("Login realizado com sucesso!");
         window.location.href = "financeiro.html";
     } else {
@@ -148,11 +143,11 @@ function login(event) {
         localStorage.setItem("tentativasLogin", tentativas);
 
         if (tentativas >= 2) {
-            alert("Errou as suas credenciais 2 vezes seguidas. A ser redirecionado para a criação de conta...");
+            alert("Errou credenciais 2 vezes. Redirecionando para a criação de conta...");
             localStorage.setItem("tentativasLogin", "0");
             window.location.href = "cadastro.html";
         } else {
-            alert("E-mail ou senha incorretos. AVISO: Só tem mais 1 tentativa antes de ser redirecionado para a criação de conta.");
+            alert("E-mail ou senha incorretos. Resta 1 tentativa antes do bloqueio.");
         }
     }
 }
@@ -168,9 +163,9 @@ let movimentacoes = JSON.parse(localStorage.getItem("movimentacoes")) || [];
 function adicionarMovimentacao(event) {
     event.preventDefault();
 
-    const descricao = document.getElementById("descricao").value.trim();
-    const valor = Number(document.getElementById("valor").value);
-    const tipo = document.getElementById("tipo").value;
+    const descricao = document.getElementById("descricao")?.value.trim();
+    const valor = Number(document.getElementById("valor")?.value);
+    const tipo = document.getElementById("tipo")?.value;
 
     if (!descricao || valor <= 0) {
         alert("Preencha os dados corretamente.");
@@ -205,7 +200,7 @@ function mostrarMovimentacoes() {
 
         div.innerHTML = `
             <div>
-                <strong>${item.descricao}</strong><br>
+                <strong class="desc-texto"></strong><br>
                 <small>${item.tipo === "ganho" ? "Ganho" : "Despesa"}</small>
             </div>
             <div class="${classe}">
@@ -213,6 +208,9 @@ function mostrarMovimentacoes() {
                 <button onclick="excluirMovimentacao(${index})" class="botao-excluir">×</button>
             </div>
         `;
+
+        // Proteção contra XSS na descrição
+        div.querySelector(".desc-texto").textContent = item.descricao;
         lista.appendChild(div);
     });
 }
@@ -266,7 +264,7 @@ function mostrarClientes() {
     alert("Feito para pessoas e pequenas empresas organizarem as suas finanças quotidianas.");
 }
 
-/* ================= INICIALIZAÇÃO ================= */
+/* ================= INICIALIZAÇÃO UNIFICADA ================= */
 document.addEventListener("DOMContentLoaded", () => {
     mostrarData();
     verificarLogin();
@@ -274,7 +272,8 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarSaldo();
 
     const campoTelefone = document.getElementById("telefone");
-    if (campoTelefone) {
-        aplicarMascaraTelefone(campoTelefone);
-    }
+    if (campoTelefone) aplicarMascaraTelefone(campoTelefone);
+
+    const campoCpf = document.getElementById("cpf");
+    if (campoCpf) aplicarMascaraCPF(campoCpf);
 });
